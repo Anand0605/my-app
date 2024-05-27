@@ -30,7 +30,6 @@ function App() {
   }
   const handleEdit = (i)=>{
     const filterList = list.filter((elm)=> elm === list[i])
-    console.log("filterList", filterList)
     setInput(filterList[0])
     setUid(i)
     setUpdate(true)
