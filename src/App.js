@@ -9,17 +9,19 @@ function App() {
   const [input, setInput] = useState("")
   const [list, setList] = useState([])
   const [uid, setUid] = useState()
+  const [update, setUpdate] = useState(false)
 
   const handleInput = (e)=>{
     setInput(e.target.value)
   }
+  const handleTask = ()=>{
+    setList([...list, input])
+    setInput("")
+  }
   const handleUpdate = ()=>{
     list.splice(uid, 1, input)
-    if(input.length===0){
-      return alert("error")
-    }
-    setList([...list,list[uid] = input])
     setInput("")
+    setUpdate(true)
   }
   const handleDelete = (i)=>{
     const filterList = list.filter((elm)=> elm != list[i])
@@ -31,6 +33,7 @@ function App() {
     console.log("filterList", filterList)
     setInput(filterList[0])
     setUid(i)
+    setUpdate(true)
   }
 
   return (
@@ -38,7 +41,7 @@ function App() {
       <h2>Todo App</h2>
       <div className='container'>
         <div className='input-box'>
-          <input type='text' value={input} onChange={(e)=>handleInput(e)} /><button onClick={handleUpdate}>Update</button>
+          <input type='text' value={input} onChange={(e)=>handleInput(e)} /><button onClick={handleTask}>Add Task</button><button onClick={handleUpdate}>Update</button>
         </div>
         <div className='list'>
             <ul>
